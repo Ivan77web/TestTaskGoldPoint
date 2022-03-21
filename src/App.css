@@ -2,3 +2,13 @@
   margin: 0;
   padding: 0;
 }
+
+.Table{
+  margin: 0 auto;
+  margin-top: 50px;
+  width: 150px;
+}
+
+.tableCurrency{
+  border: 1px solid black;
+}
