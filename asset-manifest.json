@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/TestTaskGoldPoint/static/css/main.a240c550.css",
+    "main.js": "/TestTaskGoldPoint/static/js/main.6d092c5f.js",
+    "static/js/787.935300f5.chunk.js": "/TestTaskGoldPoint/static/js/787.935300f5.chunk.js",
+    "index.html": "/TestTaskGoldPoint/index.html",
+    "main.a240c550.css.map": "/TestTaskGoldPoint/static/css/main.a240c550.css.map",
+    "main.6d092c5f.js.map": "/TestTaskGoldPoint/static/js/main.6d092c5f.js.map",
+    "787.935300f5.chunk.js.map": "/TestTaskGoldPoint/static/js/787.935300f5.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a240c550.css",
+    "static/js/main.6d092c5f.js"
+  ]
+}
