@@ -12,16 +12,33 @@ export default function Table(){
         let size = objectCurrency.length;
 
         for(let i = 0; i < size; i++){
-            let stringForCells = document.createElement("tr");
+            let stringForCells = document.createElement("div");
+            stringForCells.classList.add("stringForCells");
+            stringForCells.classList.add(`stringForCells${i}`);
 
-            let cellCode = document.createElement("td");
+            let cellCode = document.createElement("div");
+            cellCode.classList.add("cellCode");
+            cellCode.classList.add(`cellCode${i}`);
             cellCode.innerHTML = objectCurrency[i][0];
 
-            let cellValue = document.createElement("td");
-            cellValue.innerHTML = Math.round(objectCurrency[i][1].Value * 100)/100;
+            let cellValue = document.createElement("div");
+            cellValue.classList.add("cellValue");
+            cellValue.classList.add(`cellValue${i}`);
+            cellValue.innerHTML = Math.round(objectCurrency[i][1].Value * 100)/100 + "₽";
 
-            let cellChanges = document.createElement("td");
-            cellChanges.innerHTML = checkLastValue(objectCurrency[i][0], size);
+            let cellChanges = document.createElement("div");
+            cellChanges.classList.add("cellChanges");
+            cellChanges.classList.add(`cellChanges${i}`);
+
+            let percent = Math.round( (objectCurrency[i][1].Value * 100) / (checkLastValue(objectCurrency[i][0], size) ) * 100) / 100;
+            percent = Math.round((percent - 100)*100) / 100;
+            cellChanges.innerHTML = percent + "%" ;
+
+            if(percent >= 0){
+                cellChanges.classList.add("greenText")
+            } else{
+                cellChanges.classList.add("redText")
+            }
 
             table.append(stringForCells)
             stringForCells.append(cellCode);
@@ -32,10 +49,12 @@ export default function Table(){
 
     function getCurrency(object){
         objectCurrency = Object.entries(object);
+        console.log(objectCurrency);
     }
 
     function getCurrencyLast(object){
         objectCurrencyLast = Object.entries(object);
+        console.log(objectCurrencyLast);
     }
 
     function checkLastValue(code, size){
@@ -48,7 +67,8 @@ export default function Table(){
 
     useEffect(function(){
         let url = "https://www.cbr-xml-daily.ru/daily_json.js";
-        let urlLast = "https://www.cbr-xml-daily.ru/archive/" + year + "/" + "0" + month + "/" + day + "/daily_json.js";
+        // let urlLast = "https://www.cbr-xml-daily.ru/archive/" + year + "/" + "0" + month + "/19/daily_json.js";
+        let urlLast = "https://www.cbr-xml-daily.ru/archive/2022/03/19/daily_json.js";
 
         const fetchOne = fetch(url)
             .then( response => response.json() )
@@ -72,13 +92,30 @@ export default function Table(){
             })
     }, [])
 
+    document.addEventListener("mouseover", function(e){
+        if(e.target.classList.contains("stringForCells")){
+            // document.querySelector(`.${e.target.classList[1]}`).style.background = "red";
+        }
+    })
+
 
 
     return(
         <div className="Table">
-            <table className="tableCurrency">
-
-            </table>
+            <div className="header">
+                <div className="codeText">
+                    Код валюты
+                </div>
+                <div className="priceText">
+                    Стоимость в рублях   
+                </div>
+                <div className="percentText">
+                    Изменение цены в %
+                </div>
+            </div>
+            <div className="tableCurrency">
+                
+            </div>
         </div>
     )
 }
